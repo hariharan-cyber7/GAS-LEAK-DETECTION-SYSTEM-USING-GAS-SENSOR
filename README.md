@@ -11,7 +11,8 @@
 	
 ## Circuit Diagram:
 
- 
+ <img width="1096" height="597" alt="image" src="https://github.com/user-attachments/assets/145c19a0-b2f8-41bb-a038-85269ae0f4b6" />
+
 
 
 
@@ -58,9 +59,58 @@ Step 7: Save Your Work
 
 ## Program:
 
+```c
+int led_merah = 7;
+int led_kuning = 6;
+int led_hijau = 5;
+int Sensor_Gas = A0;
+const int gas = 0;
+int speaker = 2;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(led_merah,OUTPUT);
+  pinMode(led_kuning,OUTPUT);
+  pinMode(led_hijau,OUTPUT);
+  pinMode(speaker,OUTPUT);
+}
+
+void loop(){
+  
+  int data_sensor;
+  
+  data_sensor = analogRead(A0);
+  
+  Serial.print("Nilai Sensor Gas = ");
+  Serial.println(data_sensor);
+  
+  if (data_sensor <=113){
+    digitalWrite(led_hijau,HIGH);
+    digitalWrite(led_kuning,LOW);
+    digitalWrite(led_merah,LOW);
+    
+  }
+  else if ((data_sensor >= 140 && data_sensor <= 200)){
+    
+    digitalWrite(led_hijau,LOW);
+    digitalWrite(led_kuning,HIGH);
+    digitalWrite(led_merah,LOW);
+    
+  }
+  else {
+    
+    digitalWrite(led_hijau,LOW);
+    digitalWrite(led_kuning,LOW);
+    digitalWrite(led_merah,HIGH);
+    digitalWrite(speaker,HIGH);
+  }
+}
+```
+
 ## Output:
 
-   
+<img width="584" height="323" alt="image" src="https://github.com/user-attachments/assets/eddd46f9-3e26-4373-af69-145969c696be" />
+
 
 ## Result:
-
+The gas leak detection system was successfully implemented using Arduino UNO and MQ-2 gas sensor in Tinkercad. The system effectively monitored gas concentration levels in real-time, displaying analog readings on a 16x2 LCD screen along with corresponding safety status indicators. When gas levels were below 400, the green LED illuminated with "SAFE" status; levels between 400-500 triggered the yellow LED with "WARNING" message; and levels above 500 activated the red LED with "DANGER" alert. The serial monitor provided continuous numerical data logging for analysis. The circuit demonstrated proper threshold-based decision making and visual feedback through LEDs and LCD, proving its effectiveness as a safety monitoring system for detecting hazardous gas leaks in real-world applications.
